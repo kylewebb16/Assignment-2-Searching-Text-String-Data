@@ -1,15 +1,11 @@
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 
 public class Gui {
     public Gui() {
@@ -17,10 +13,9 @@ public class Gui {
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JFrame.setDefaultLookAndFeelDecorated(true);
         mainFrame.getContentPane().setLayout(new GridBagLayout());
-    
+
         createInstructionsPanel(mainFrame);
         createButtons(mainFrame);
-    
     
         mainFrame.pack();
         mainFrame.setVisible(true);
@@ -28,8 +23,8 @@ public class Gui {
 
     
     private static void createInstructionsPanel(JFrame mainFrame) {
-        JLabel instructionsTextArea = new JLabel();
-        instructionsTextArea.setText("<html><h2>Use the buttons to display the provided text, search for text in the program, and exit the program<h2></html>");
+        JLabel instructionsLabel = new JLabel();
+        instructionsLabel.setText("<html><h2>Use the buttons to display the provided text, search for text in the program, and exit the program<h2></html>");
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -38,7 +33,7 @@ public class Gui {
         gbc.insets = new Insets(5, 20, 5, 20);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.PAGE_START;
-        mainFrame.getContentPane().add(instructionsTextArea, gbc);
+        mainFrame.getContentPane().add(instructionsLabel, gbc);
     }
 
     private static class MyButton extends JButton{
@@ -77,7 +72,15 @@ public class Gui {
         b3Constraints.insets = new Insets(2, 0, 2, 0);
         mainFrame.getContentPane().add(exitButton3, b3Constraints);
 
-
+        Action printAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                createOutputText(mainFrame);
+            }
+        };
+        printButton1.addActionListener(printAction);
+        printButton1.getInputMap().put(KeyStroke.getKeyStroke("1"), "printText");
+        printButton1.getActionMap().put("printText", printAction);
     }
 
     private static void createOutputText(JFrame mainFrame) {
@@ -103,28 +106,28 @@ public class Gui {
         gbc.anchor = GridBagConstraints.PAGE_START;
 
         mainFrame.getContentPane().add(outputEditorPane, gbc);
+        mainFrame.pack();
     }
 
     
     public static String getStatesString() {
         // Add 50 states to a string
-        String states = "Alabama, " + "Alaska, " + "Arizona, " + 
-                        "Arkansas, " + "California, " + "Colorado, " + 
-                        "Connecticut, " + "Delaware, " + "Florida, " + 
-                        "Georgia, " + "Hawaii, " + "Idaho, " + 
-                        "Illinois, " + "Indiana, " + "Iowa, " + 
-                        "Kansas, " + "Kentucky, " + "Louisiana, " + 
-                        "Maine, " + "Maryland, " + "Massachusetts, " + 
-                        "Michigan, " + "Minnesota, " + "Mississippi, " + 
-                        "Missouri, " + "Montana, " + "Nebraska, " + 
-                        "Nevada, " + "New Hampshire, " + "New Jersey, " + 
-                        "New Mexico, " + "New York, " + "North Carolina, " + 
-                        "North Dakota, " + "Ohio, " + "Oklahoma, " + 
-                        "Oregon, " + "Pennsylvania, " + "Rhode Island, " + 
-                        "South Carolina, " + "South Dakota, " + "Tennessee, " + 
-                        "Texas, " + "Utah, " + "Vermont, " + 
-                        "Virginia, " + "Washington, " + "West Virginia, " + 
-                        "Wisconsin, " + "Wyoming";
-        return states;
+        return "Alabama, " + "Alaska, " + "Arizona, " +
+                "Arkansas, " + "California, " + "Colorado, " +
+                "Connecticut, " + "Delaware, " + "Florida, " +
+                "Georgia, " + "Hawaii, " + "Idaho, " +
+                "Illinois, " + "Indiana, " + "Iowa, " +
+                "Kansas, " + "Kentucky, " + "Louisiana, " +
+                "Maine, " + "Maryland, " + "Massachusetts, " +
+                "Michigan, " + "Minnesota, " + "Mississippi, " +
+                "Missouri, " + "Montana, " + "Nebraska, " +
+                "Nevada, " + "New Hampshire, " + "New Jersey, " +
+                "New Mexico, " + "New York, " + "North Carolina, " +
+                "North Dakota, " + "Ohio, " + "Oklahoma, " +
+                "Oregon, " + "Pennsylvania, " + "Rhode Island, " +
+                "South Carolina, " + "South Dakota, " + "Tennessee, " +
+                "Texas, " + "Utah, " + "Vermont, " +
+                "Virginia, " + "Washington, " + "West Virginia, " +
+                "Wisconsin, " + "Wyoming";
     }
 }
