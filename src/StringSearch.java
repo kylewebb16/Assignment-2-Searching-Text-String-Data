@@ -12,29 +12,25 @@ public class StringSearch {
         HashMap<Character, Integer> badChars = computeBadCharacter(searchArray);
         int textLength = textArray.length;
         int searchLength = searchArray.length;
-        int txtPTR = 0;
-        while (txtPTR < textLength - searchLength) {
-            int patPTR = searchLength - 1;
-            while (patPTR >= 0 && searchArray[patPTR] == textArray[txtPTR + patPTR]) {
-                patPTR--;
+        int i = 0;
+        while (i < textLength - searchLength) {
+            int j = searchLength - 1;
+            while (j >= 0 && searchArray[j] == textArray[i + j]) {
+                j--;
             }
-            if (patPTR == -1) {
-                results.add(txtPTR);
-                txtPTR++;
+            if (j == -1) {
+                results.add(i);
+                i++;
             }
             else {
                 // If pattern contains the current character
                     // add occurance to textptr
                 // else shift textptr entire searchkey length
-                char currentChar = textArray[txtPTR + patPTR];
+                char currentChar = textArray[i + j];
 // ERROR HERE
-                if (badChars.containsKey(currentChar)) {
-                    int badchrget = badChars.get(currentChar);
-                    int interval = patPTR - badchrget;
-                    txtPTR += interval;
-                } else {
-                    txtPTR += patPTR + 1;
-                }
+                int lastOccurance = badChars.getOrDefault(currentChar, -1);
+                // j - lastOccurance either shifts to
+                i += Math.max(j - lastOccurance, 1);
             }
         }
 
