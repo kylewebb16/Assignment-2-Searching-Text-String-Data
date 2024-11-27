@@ -28,7 +28,7 @@ public class Gui {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 2;
         gbc.ipadx = 10;
         gbc.insets = new Insets(5, 20, 5, 20);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -38,7 +38,7 @@ public class Gui {
 
     private static class MyButton extends JButton{
         public MyButton(ImageIcon icon, String buttonText){
-            this.setText(buttonText);
+            this.setText("<html><h2>" + buttonText + "</h2></html>");
             this.setIcon(icon);
             this.setPreferredSize(new Dimension(200, 70));
             this.setIconTextGap(20);
@@ -49,25 +49,25 @@ public class Gui {
     
     private static void createButtons(JFrame mainFrame) {
         
-        MyButton printButton1 = new MyButton(new ImageIcon("../images/keyboard (1).png"), "<html><h2>Print Text</h2></html>");
+        MyButton printButton1 = new MyButton(new ImageIcon("../images/keyboard (1).png"), "Print Text");
         GridBagConstraints b1Constraints = new GridBagConstraints();
-        b1Constraints.gridx = 2;
+        b1Constraints.gridx = 1;
         b1Constraints.gridy = 1;
         b1Constraints.insets = new Insets(2, 0, 2, 0);
         mainFrame.getContentPane().add(printButton1, b1Constraints);
         
         
-        MyButton searchButton2 = new MyButton(new ImageIcon("../images/keyboard (2).png"), "<html><h2>Search Text</h2></html>");
+        MyButton searchButton2 = new MyButton(new ImageIcon("../images/keyboard (2).png"), "Search Text");
         GridBagConstraints b2Constraints = new GridBagConstraints();
-        b2Constraints.gridx = 2;
+        b2Constraints.gridx = 1;
         b2Constraints.gridy = 2;
         b2Constraints.insets = new Insets(2, 0, 2, 0);
         mainFrame.getContentPane().add(searchButton2, b2Constraints);
         
         
-        MyButton exitButton3 = new MyButton(new ImageIcon("../images/keyboard (3).png"), "<html><h2>Exit Program</h3></html>");
+        MyButton exitButton3 = new MyButton(new ImageIcon("../images/keyboard (3).png"), "Exit Program");
         GridBagConstraints b3Constraints = new GridBagConstraints();
-        b3Constraints.gridx = 2;
+        b3Constraints.gridx = 1;
         b3Constraints.gridy = 3;
         b3Constraints.insets = new Insets(2, 0, 2, 0);
         mainFrame.getContentPane().add(exitButton3, b3Constraints);
@@ -93,7 +93,7 @@ public class Gui {
         outputEditorPane.setLineWrap(true);
         outputEditorPane.setWrapStyleWord(true);
         outputEditorPane.setEditable(false);
-        outputEditorPane.setPreferredSize(new Dimension(400, 120));
+        outputEditorPane.setPreferredSize(new Dimension(400, 140));
 
         // Positioning row 2, column 0, fill horizontal
         GridBagConstraints gbc = new GridBagConstraints();
