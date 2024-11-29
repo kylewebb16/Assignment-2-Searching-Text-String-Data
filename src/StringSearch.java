@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Arrays;
 
 public class StringSearch {
-    String text = "the dog and the man go to the park";
-
     // Preforms the text search for search term using bad-character rule
     public static ArrayList<Integer> BMAlgorithm(String text, String searchKey) {
         // Set text and search inputs as char[] to iterate over
@@ -37,7 +35,7 @@ public class StringSearch {
                 char currentChar = textArray[i + j];
                 // If mismatched char does not exist in search key, skip past it
                 int lastOccur = badChars.getOrDefault(currentChar, -1);
-
+                // Skip based on bad character rule, if bad character returns negative move forward 1
                 i += Math.max(j - lastOccur, 1);
             }
         }
@@ -45,33 +43,16 @@ public class StringSearch {
 
         return results;
     }
-    // Boyer-moore
-        // Bad character rule
-            // If last char != searchKey && does not exist in search key, we can skip the whole sequence
-        // Good suffix rule
+
     public static HashMap<Character, Integer> computeBadCharacter(char[] searchArray) {
+        // Create map to quickly retrieve last position of characters
         HashMap<Character, Integer> badChars = new HashMap<>();
         int searchLength = searchArray.length;
+        // Fill map with last character position in search key, allows skipping characters that don't exist in the search key
         for (int i = 0; i < searchLength; i++) {
             badChars.put(searchArray[i], i);
         }
         return badChars;
     }
 
-//    public static int[] goodSuffixTable(String searchKey) {
-//        int length = searchKey.length();
-//        int[] suffixShift = new int[length];
-//        Arrays.fill(suffixShift, length);
-//        for (int i = length - 1; i > 0; i--) {
-//            String suffix = searchKey.substring(i);
-//            for (int j = i - 1; j > 0; j--) {
-//                if (searchKey.substring(j).startsWith(suffix)) {
-//                    //             dist from end  -  suffix length
-//                    suffixShift[i] = (length - j) - (length - i);
-//                }
-//            }
-//
-//        }
-//        return suffixShift;
-//    }
 }
